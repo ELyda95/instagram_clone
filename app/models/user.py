@@ -45,6 +45,6 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "about": self.about,
-            "profilePicture": self.profilePicture.
+            "profilePicture": self.profilePicture,
             "posts": [post.to_dict() for post in self.posts]
         }
