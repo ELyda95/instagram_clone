@@ -1,7 +1,7 @@
 from .db import db
 
 class Post(db.Model):
-    __tablename__: "posts"
+    __tablename__ = "posts"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(255), nullable=False)
@@ -10,8 +10,8 @@ class Post(db.Model):
     createdAt = db.Column(db.DateTime, server_default=db.func.now())
 
     user = db.relationship("User", back_populates="posts")
-    comments = db.relationship("Comment", back_populates="posts")
-    likes = db.relationship("Like", back_populates="posts")
+    comments = db.relationship("Comment", back_populates="post")
+    likes = db.relationship("Like", back_populates="post")
 
     def to_dict(self):
         return {

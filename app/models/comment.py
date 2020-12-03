@@ -2,7 +2,7 @@ from .db import db
 
 
 class Comment(db.Model):
-    __tablename__: "comments"
+    __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(255), nullable=False)

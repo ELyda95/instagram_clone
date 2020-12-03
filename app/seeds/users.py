@@ -6,9 +6,6 @@ from app.models import db, User
 
 def seed_users():
 
-    demo = User(username='Demo', email='demo@aa.io',
-                password='password')
-
     James = User(fullname='James Ballard', username='YaaaBoiJames', email='james@james.com', hashed_password="password",
                 about="I am the scrum master 3000", profilePicture='https://i.kym-cdn.com/entries/icons/facebook/000/003/047/omg.jpg')
 
@@ -21,8 +18,12 @@ def seed_users():
     Alfredo = User(fullname='Alfredo', username='Alfredabest', email="alfredo@alfredo.com", hashed_password="password",
                      about="Cool a cuucumber", profilePicture='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2011/2/4/1/RX-FNM_030111-Lighten-Up-012_s4x3.jpg.rend.hgtvcom.826.620.suffix/1382539856907.jpeg')
 
-    users = {demo, James, Bart, Sergey, Alfredo}
-    db.session.add(users)
+
+    # db.session.add(demo)
+    db.session.add(James)
+    db.session.add(Bart)
+    db.session.add(Sergey)
+    db.session.add(Alfredo)
 
     db.session.commit()
 
