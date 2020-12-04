@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
+  const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,12 +12,16 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(fullname, username, email, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
     }
   };
+
+  const updateFullname = (e) => {
+    setFullname(e.target.value)
+  }
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -40,6 +45,15 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
 
   return (
     <form onSubmit={onSignUp}>
+      <div>
+        <label htmlFor="">Full name</label>
+        <input
+        type="text"
+        name="fullname"
+        onChange={updateFullname}
+        value={fullname}
+        />
+      </div>
       <div>
         <label>User Name</label>
         <input
