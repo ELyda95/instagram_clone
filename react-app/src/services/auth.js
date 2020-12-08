@@ -46,3 +46,18 @@ export const signUp = async (fullname, username, email, password) => {
   });
   return await response.json();
 }
+
+export const newPost = async (content, caption) => {
+  const response = await fetch("/api/posts/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      content,
+      caption
+    }),
+  });
+  console.log(content)
+  return await response.json();
+}

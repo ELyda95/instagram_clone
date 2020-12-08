@@ -9,8 +9,7 @@ user_routes = Blueprint('users', __name__)
 @login_required
 def users():
     user = User.query.filter(User.id == current_user.id).one()
-    print(user.to_dict())
-    return user.to_dict()
+    return user.to_joined_dict()
 
 
 @user_routes.route('/<int:id>')

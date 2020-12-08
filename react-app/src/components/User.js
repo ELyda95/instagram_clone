@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Post from "./Post";
+import PostForm from "./PostForm";
 
 function User() {
   const [user, setUser] = useState({});
-  // Notice we use useParams here instead of getting the params
-  // From props.
+  const [posts, setPosts] = useState([])
+
 
   useEffect(() => {
     if (!user) {
@@ -18,22 +20,39 @@ function User() {
     })();
   }, [user.id]);
 
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(`/api/posts/`);
+      const newPosts = await response.json();
+      setPosts(newPosts)
+    })();
+  }, [posts]);
+
   if (!user) {
     return null;
   }
 
+
+
   return (
-    <ul>
-      <li>
-        <strong>User Id</strong> {user.id}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
+    <div>
+      <ul>
+        <li>
+          <strong>User Id</strong> {user.id}
+        </li>
+        <li>
+          <strong>Username</strong> {user.username}
+        </li>
+        <li>
+          <strong>Email</strong> {user.email}
+        </li>
+      </ul>
+      <PostForm />
+      {posts.map(post => (
+        <Post username={post.userId} caption={post.caption} imageUrl={post.content} />
+      ))}
+    </div>
+
   );
 }
 export default User;
